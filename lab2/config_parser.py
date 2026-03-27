@@ -23,4 +23,9 @@ except FileNotFoundError:
 except yaml.YAMLError as err:
     raise Exception(f'An error occured in the YAML file structure: {err}')
 
-print(data)
+def pretty_printer(data: dict):
+    for key, val in data.items():
+        if type(key) is dict:
+            pretty_printer(key)
+        else:
+            ...
