@@ -12,7 +12,7 @@ This repository is organized by laboratory sessions. Each folder contains the so
 | Directory | Topic / Description |
 | :--- | :--- |
 | [`lab1/`](./lab1) | Interactive mathematical function calculator using SymPy. |
-<!-- Future labs will be added here -->
+| [`lab2/`](./lab2) | YAML Configuration Manager with recursive parsing and structural validation. |
 
 ## 🚀 Getting Started
 
