@@ -1,6 +1,7 @@
 import argparse
 from pathlib import Path
 import yaml
+from sys import exit
 
 REQUIRED_PATHS: list[str] = [
         'app.name',
@@ -20,6 +21,13 @@ def pretty_printer(data: dict, offset: int = 0) -> None:
             print(f'{indent}{key}:')
             pretty_printer(data=val, offset=offset + 4)
         else:
+            # bool in Python is capitalized, and in YAML is all lowercase
+            if isinstance(val, bool):
+                val = str(val).lower()
+            # strings in YAML are surrounded with ""
+            elif isinstance(val, str):
+                val = f'"{val}"'
+                
             print(f'{indent}{key}: {val}')
             
 def config_validator(data: dict) -> list[str] | None:
@@ -48,16 +56,17 @@ def main() -> None:
 
     args = parser.parse_args()
     config_path = args.config
-    if not config_path:
-        raise Exception('No config file specified.')
 
     try:
         with open(config_path, 'r', encoding='utf-8') as file:
             data = yaml.safe_load(file)
     except FileNotFoundError:
-        raise Exception(f'File {config_path} not found')
+        print(f'File "{config_path}" not found')
+        exit(1)
+        
     except yaml.YAMLError as err:
-        raise Exception(f'An error occured in the YAML file structure: {err}')
+        print(f'An error occured in the YAML file structure: {err}')
+        exit(1)
 
     pretty_printer(data=data)
     print()
