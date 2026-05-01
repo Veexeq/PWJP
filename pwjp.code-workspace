@@ -6,22 +6,25 @@
   ],
   "settings": {
     "[python]": {
-      "editor.defaultFormatter": "charliermarsh.ruff",
-      "editor.formatOnSave": false
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      },
+      "editor.defaultFormatter": "charliermarsh.ruff"
     },
-    "python.analysis.typeCheckingMode": "basic"
-  },
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Python: Debuguj aktualny plik",
-        "type": "debugpy",
-        "request": "launch",
-        "program": "${file}",
-        "console": "integratedTerminal",
-        "justMyCode": true
-      }
-    ]
+    "launch": {
+      "version": "0.2.0",
+      "configurations": [
+        {
+          "name": "Python: Debuguj aktualny plik",
+          "type": "debugpy",
+          "request": "launch",
+          "program": "${file}",
+          "console": "integratedTerminal",
+          "justMyCode": true
+        }
+      ]
+    }
   }
 }

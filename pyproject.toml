@@ -1,0 +1,6 @@
+[tool.ruff]
+# E - błędy stylu, F - błędy logiczne
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+select = ["E", "F", "I"]
