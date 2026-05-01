@@ -1,5 +1,6 @@
 import util
 from KontoBankowe import KontoBankowe
+from Pojazdy import Motocykl, Pojazd, Samochod
 from Student import Student
 
 
@@ -65,10 +66,36 @@ def test_intermediate() -> None:
     except Exception as e:
         print(f"Wystąpił nieoczekiwany błąd [{type(e).__name__}]: {e}")
 
+    print()
 
-def test_advanced() -> None: ...
+
+def test_advanced() -> None:
+    util.print_header("POZIOM ZAAWANSOWANY")
+
+    # Tworzenie obiektów za pomocą standardowego konstruktora
+    auto_manual = Samochod(marka="Toyota", model="Corolla", rok="2020", liczba_drzwi=5)
+    moto_manual = Motocykl(marka="Yamaha", model="MT-07", rok="2022", typ="Naked")
+
+    # Tworzenie obiektów za pomocą metody klasowej
+    auto_default = Samochod.utworz_domyslny()
+    moto_default = Motocykl.utworz_domyslny()
+
+    # Pokazanie działania metody opis() oraz polimorfizm
+    print(auto_manual.opis())
+    print(moto_manual.opis())
+    print(auto_default.opis())
+    print(moto_default.opis())
+
+    # Pokazanie działania metody statycznej
+    test_years = [1800, 1995, 2024, 2030]
+
+    for year in test_years:
+        res = Pojazd.czy_poprawny_rok(year)
+        status = "poprawny" if res else "niepoprawny"
+        print(f"Rok {year} jest {status}.")
 
 
 def run_all_tests() -> None:
     test_basic()
     test_intermediate()
+    test_advanced()
