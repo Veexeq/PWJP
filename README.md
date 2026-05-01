@@ -13,6 +13,8 @@ This repository is organized by laboratory sessions. Each folder contains the so
 | :--- | :--- |
 | [`lab1/`](./lab1) | Interactive mathematical function calculator using SymPy. |
 | [`lab2/`](./lab2) | YAML Configuration Manager with recursive parsing and structural validation. |
+| [`lab3/`](./lab3) | Iterators and generators in parsing code from `lab2/`. |
+| [`lab4/`](./lab4) | Basics of OOP in Python - inheritance, encapsulation, polymorphism. First lab project to have a unit test suite. |
 
 ## 🚀 Getting Started
 
