@@ -1,6 +1,6 @@
 import util
-from Student import Student
 from KontoBankowe import KontoBankowe
+from Student import Student
 
 
 def test_basic() -> None:
