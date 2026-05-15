@@ -19,9 +19,8 @@ class ConfigFactory:
             case SectionType.SERVER:
                 return cd.ServerConfig(**data)
             case SectionType.DATABASE:
-                dbconfig = data["database"]
-                credentials = cd.DatabaseCredentialsConfig(**dbconfig["credentials"])
-                settings = cd.DatabaseSettingsConfig(**dbconfig["settings"])
+                credentials = cd.DatabaseCredentialsConfig(**data["credentials"])
+                settings = cd.DatabaseSettingsConfig(**data["settings"])
                 return cd.DatabaseConfig(credentials=credentials, settings=settings)
             case _:
                 raise ValueError(f"{section_name} is not a valid section name")

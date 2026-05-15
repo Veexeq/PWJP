@@ -44,9 +44,20 @@ def main() -> None:
 
     # POZIOM ŚREDNIOZAAWANSOWANY
 
-    app_config = config["app"]
-    section_obj = cf.ConfigFactory.create_section("app", app_config)
-    section_obj.display()
+    # app_config = config["app"]
+    # section_obj = cf.ConfigFactory.create_section("app", app_config)
+    # section_obj.display()
+
+    # Dodatkowe założenie
+    objects = {}
+    for section_name, section_data in config.items():
+        obj = cf.ConfigFactory.create_section(
+            section_name=section_name, data=section_data
+        )
+        obj.validate()
+        objects[section_name] = obj
+    
+    print(str(objects))
 
 
 if __name__ == "__main__":
