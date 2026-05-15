@@ -56,8 +56,24 @@ def main() -> None:
         )
         obj.validate()
         objects[section_name] = obj
-    
+
     print(str(objects))
+
+    # KONIEC POZIOMU ŚREDNIOZAAWANSOWANEGO
+
+    # POZIOM ZAAWANSOWANY
+
+    application_config = cd.ApplicationConfig()
+    for section_name, section_data in config.items():
+        new_section = cf.ConfigFactory.create_section(
+            section_name=section_name, data=section_data
+        )
+        application_config.add_section(section_name=section_name, config=new_section)
+
+    application_config.validate_all()
+    application_config.display_all()
+
+    # KONIEC POZIOMU ZAAWANSOWANEGO
 
 
 if __name__ == "__main__":

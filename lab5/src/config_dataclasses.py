@@ -1,14 +1,40 @@
-from dataclasses import dataclass, fields
+from abc import ABC, abstractmethod
+from dataclasses import dataclass, field, fields
 
 
-class BaseConfigSection:
+class BaseConfigSection(ABC):
     def __str__(self) -> str:
         return ", ".join(
             f"{field.name}={getattr(self, field.name)!r}" for field in fields(self)
         )
 
+    @abstractmethod
+    def validate(self) -> None:
+        pass
+
     def display(self) -> None:
         print(f"{self.__class__.__name__}: {str(self)}")
+
+
+@dataclass(slots=True, frozen=False)
+class ApplicationConfig:
+    _sections: dict[str, BaseConfigSection] = field(default_factory=dict)
+
+    def add_section(self, section_name: str, config: BaseConfigSection) -> None:
+        self._sections[section_name] = config
+
+    def remove_section(self, section_name: str) -> None:
+        if section_name not in self.__sections:
+            raise ValueError(f"{section_name} not in this ApplicationConfig")
+        self._sections.pop(section_name)
+
+    def validate_all(self) -> None:
+        for section in self._sections.values():
+            section.validate()
+
+    def display_all(self) -> None:
+        for name, section in self._sections.items():
+            print(f"[{name}] {str(section)}")
 
 
 @dataclass(slots=True, frozen=True)
