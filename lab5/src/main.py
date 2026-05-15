@@ -42,39 +42,47 @@ def main() -> None:
 
     # KONIEC POZIOMU PODSTAWOWEGO
 
-    # POZIOM ŚREDNIOZAAWANSOWANY
+    # # POZIOM ŚREDNIOZAAWANSOWANY
 
-    # app_config = config["app"]
-    # section_obj = cf.ConfigFactory.create_section("app", app_config)
-    # section_obj.display()
+    # # app_config = config["app"]
+    # # section_obj = cf.ConfigFactory.create_section("app", app_config)
+    # # section_obj.display()
 
-    # Dodatkowe założenie
-    objects = {}
-    for section_name, section_data in config.items():
-        obj = cf.ConfigFactory.create_section(
-            section_name=section_name, data=section_data
-        )
-        obj.validate()
-        objects[section_name] = obj
+    # # Dodatkowe założenie
+    # objects = {}
+    # for section_name, section_data in config.items():
+    #     obj = cf.ConfigFactory.create_section(
+    #         section_name=section_name, data=section_data
+    #     )
+    #     obj.validate()
+    #     objects[section_name] = obj
 
-    print(str(objects))
+    # print(str(objects))
 
-    # KONIEC POZIOMU ŚREDNIOZAAWANSOWANEGO
+    # # KONIEC POZIOMU ŚREDNIOZAAWANSOWANEGO
 
-    # POZIOM ZAAWANSOWANY
+    # # POZIOM ZAAWANSOWANY
 
-    application_config = cd.ApplicationConfig()
-    for section_name, section_data in config.items():
-        new_section = cf.ConfigFactory.create_section(
-            section_name=section_name, data=section_data
-        )
-        application_config.add_section(section_name=section_name, config=new_section)
+    # application_config = cd.ApplicationConfig()
+    # for section_name, section_data in config.items():
+    #     new_section = cf.ConfigFactory.create_section(
+    #         section_name=section_name, data=section_data
+    #     )
+    #     application_config.add_section(section_name=section_name, config=new_section)
 
-    application_config.validate_all()
-    application_config.display_all()
+    # application_config.validate_all()
+    # application_config.display_all()
 
-    # KONIEC POZIOMU ZAAWANSOWANEGO
-
+    # # KONIEC POZIOMU ZAAWANSOWANEGO
+    
+    # ZADANIE DODATKOWE
+    
+    cf.ConfigFactory.register("app", cd.AppConfig)
+    cf.ConfigFactory.register("server", cd.ServerConfig)
+    cf.ConfigFactory.register("database", cd.DatabaseConfig)
+    cf.ConfigFactory.register("logging", cd.LogingConfig)
+    
+    print(cf.ConfigFactory.show_registry())
 
 if __name__ == "__main__":
     main()

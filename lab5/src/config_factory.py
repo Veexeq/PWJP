@@ -1,4 +1,5 @@
 from enum import StrEnum
+from typing import Any
 
 import config_dataclasses as cd
 
@@ -10,17 +11,28 @@ class SectionType(StrEnum):
 
 
 class ConfigFactory:
-    @staticmethod
-    def create_section(section_name: str, data: dict) -> cd.BaseConfigSection:
-        section = SectionType(section_name.lower())
-        match section:
-            case SectionType.APP:
-                return cd.AppConfig(**data)
-            case SectionType.SERVER:
-                return cd.ServerConfig(**data)
-            case SectionType.DATABASE:
-                credentials = cd.DatabaseCredentialsConfig(**data["credentials"])
-                settings = cd.DatabaseSettingsConfig(**data["settings"])
-                return cd.DatabaseConfig(credentials=credentials, settings=settings)
-            case _:
-                raise ValueError(f"{section_name} is not a valid section name")
+    _registry: dict[str, type[cd.BaseConfigSection]] = {}
+
+    @classmethod
+    def register(
+        cls, section_name: str, section_class: type[cd.BaseConfigSection]
+    ) -> None:
+        cls._registry[section_name] = section_class
+
+    @classmethod
+    def create_section(
+        cls, section_name: str, data: dict[str, Any]
+    ) -> cd.BaseConfigSection:
+        section_key = section_name.lower()
+
+        if section_name not in cls._registry:
+            raise ValueError(
+                f"Nieznana sekcja: '{section_name}'. Najpierw należy ją zarejestrować"
+            )
+
+        TargetClass = cls._registry[section_key]
+        return TargetClass(**data)
+    
+    @classmethod
+    def show_registry(cls) -> str:
+        return f"{cls._registry!r}"

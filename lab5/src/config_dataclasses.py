@@ -126,3 +126,6 @@ class DatabaseConfig(BaseConfigSection):
 
         self.credentials.validate()
         self.settings.validate()
+
+
+class LogingConfig(BaseConfigSection): ...
