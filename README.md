@@ -15,6 +15,7 @@ This repository is organized by laboratory sessions. Each folder contains the so
 | [`lab2/`](./lab2) | YAML Configuration Manager with recursive parsing and structural validation. |
 | [`lab3/`](./lab3) | Iterators and generators in parsing code from `lab2/`. |
 | [`lab4/`](./lab4) | Basics of OOP in Python - inheritance, encapsulation, polymorphism. First lab project to have a unit test suite. |
+| [`lab5/`](./lab5) | Implementation of the Factory Method based on YAML config files. |
 
 ## 🚀 Getting Started
 
