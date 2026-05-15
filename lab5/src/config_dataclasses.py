@@ -116,6 +116,13 @@ class DatabaseConfig(BaseConfigSection):
     credentials: DatabaseCredentialsConfig
     settings: DatabaseSettingsConfig
 
+    @classmethod
+    def from_dict(cls, data: dict) -> 'DatabaseConfig':
+        """Inicjalizuje DatabaseConfig z zagnieżdżonego słownika"""
+        credentials = DatabaseCredentialsConfig(**data.get("credentials", {}))
+        settings = DatabaseSettingsConfig(**data.get("settings", {}))
+        return cls(credentials=credentials, settings=settings)
+
     def validate(self) -> None:
         if not isinstance(self.credentials, DatabaseCredentialsConfig):
             raise TypeError(

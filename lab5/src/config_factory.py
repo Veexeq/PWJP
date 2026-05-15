@@ -31,6 +31,11 @@ class ConfigFactory:
             )
 
         TargetClass = cls._registry[section_key]
+        
+        # Jeśli klasa ma własny sposób na inicjalizację, korzystamy
+        if hasattr(TargetClass, 'from_dict'):
+            return TargetClass.from_dict(data)
+        
         return TargetClass(**data)
     
     @classmethod
